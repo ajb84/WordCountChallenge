@@ -77,11 +77,12 @@ public class OutputFileGenerator {
 	//method to sort word count in descending order
 	private static Map<String, Integer> wordCountSorter(Map<String, Integer> mapToSort){
 		 
-		//Sort list descending order
+		//Convert map into stream
 		Map<String, Integer> sortedMapList = mapToSort.entrySet().stream()
+				//sorting map
 				.sorted(Map.Entry.comparingByValue(Comparator.reverseOrder()))
-				.collect(Collectors.toMap(Map.Entry::getKey,  Map.Entry::getValue,
-						(oldValue, newValue) -> oldValue, LinkedHashMap::new));
+				//collecting and adding to new LinkedHashMap to keep correct order
+				.collect(Collectors.toMap(Map.Entry::getKey,  Map.Entry::getValue, (oldValue, newValue) -> oldValue, LinkedHashMap::new));
 		
 		return sortedMapList;
 		
